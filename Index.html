@@ -2139,6 +2139,25 @@
                 html.classList.remove('dark');
             }
         });
+        // 1. Cashfree ko sandbox/test mode me shuru karein
+const cashfree = Cashfree({ mode: "sandbox" }); 
+
+// 2. Apne Checkout Button par click event lagayein
+// Note: 'pay-button-id' ki jagah apne actual HTML button ki ID daalein
+document.getElementById('pay-button-id').addEventListener('click', async () => {
+    
+    // Yahan aapko apne backend/webhook se payment_session_id mangwani hogi.
+    // Kyunki aap mobile par hain, test karne ke liye aap Cashfree dashboard se ek temporary order banakar 
+    // uski session_id yahan direct paste karke check kar sakte hain:
+    const myPaymentSessionId = "YOUR_TEST_SESSION_ID_HERE"; 
+
+    // 3. Checkout trigger karein
+    cashfree.checkout({
+        paymentSessionId: myPaymentSessionId,
+        redirectTarget: "_self" // Ussi window me checkout kholne ke liye
+    });
+});
+    
     </script>
 </body>
 </html>
